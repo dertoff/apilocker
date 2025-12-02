@@ -29,7 +29,7 @@ export default function App() {
   // Social Proof Toast Loop
   useEffect(() => {
     const names = ["Alex_K", "Shadow99", "ProGamer", "KillerMike", "Sarah12", "NoobSlayer"];
-    const actions = ["unlocked God Mode", "downloaded v4.2", "activated Auto-Farm"];
+    const actions = ["unlocked Mod Menu", "downloaded v4.2", "activated Auto-Farm"];
     
     const triggerToast = () => {
       const randomName = names[Math.floor(Math.random() * names.length)];
@@ -100,17 +100,6 @@ export default function App() {
                <p className="text-xs font-bold text-gray-200">{toastMessage}</p>
             </div>
          </div>
-      </div>
-
-      {/* Clean Sticky Mobile CTA */}
-      <div className="fixed bottom-0 left-0 w-full p-3 bg-[#050505]/90 backdrop-blur border-t border-gray-800 z-30 md:hidden">
-        <button 
-          onClick={openLocker}
-          className="w-full bg-green-600 text-white font-bold text-base py-3.5 rounded-lg shadow-lg flex items-center justify-center gap-2"
-        >
-          <Download className="w-5 h-5" />
-          DOWNLOAD FREE
-        </button>
       </div>
 
       {isLockerOpen && <LockerModal onClose={closeLocker} />}

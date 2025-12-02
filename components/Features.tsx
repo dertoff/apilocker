@@ -4,7 +4,7 @@ import { Crosshair, Eye, Zap, Lock, Ghost, Cpu } from 'lucide-react';
 const features = [
   {
     icon: <Ghost className="w-10 h-10 text-purple-400" />,
-    title: "GOD MODE",
+    title: "INVINCIBILITY",
     desc: "Become invincible. Walk through enemies and take zero damage while you farm.",
     badge: "OP"
   },

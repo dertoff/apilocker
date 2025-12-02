@@ -45,7 +45,7 @@ export const ScriptPreview: React.FC<ScriptPreviewProps> = ({ onDownload }) => {
           {/* Blurred Code */}
           <div className="text-green-500/50 blur-[3px] select-none opacity-60 transform scale-100 transition-transform duration-700 group-hover:scale-105">
             <p><span className="text-purple-400">local</span> <span className="text-blue-400">Library</span> = <span className="text-yellow-400">loadstring</span>(game:<span className="text-yellow-400">HttpGet</span>(<span className="text-orange-300">"https://raw.githubusercontent.com/99Nights/Hub/main/source.lua"</span>))()</p>
-            <p><span className="text-purple-400">local</span> <span className="text-blue-400">Window</span> = Library.<span className="text-yellow-400">CreateLib</span>(<span className="text-orange-300">"99 Nights God Mode"</span>, <span className="text-orange-300">"DarkTheme"</span>)</p>
+            <p><span className="text-purple-400">local</span> <span className="text-blue-400">Window</span> = Library.<span className="text-yellow-400">CreateLib</span>(<span className="text-orange-300">"99 Nights Mod Menu"</span>, <span className="text-orange-300">"DarkTheme"</span>)</p>
             <br />
             <p className="text-gray-500">-- BYPASS MODULE V4 LOADED --</p>
             <p><span className="text-purple-400">local</span> <span className="text-blue-400">Bypass</span> = <span className="text-yellow-400">require</span>(game.ReplicatedStorage.Security)</p>
@@ -53,10 +53,10 @@ export const ScriptPreview: React.FC<ScriptPreviewProps> = ({ onDownload }) => {
             <br />
             <p><span className="text-purple-400">local</span> <span className="text-blue-400">Main</span> = Window:<span className="text-yellow-400">NewTab</span>(<span className="text-orange-300">"Auto Farm"</span>)</p>
             <p><span className="text-purple-400">local</span> <span className="text-blue-400">Section</span> = Main:<span className="text-yellow-400">NewSection</span>(<span className="text-orange-300">"Main Features"</span>)</p>
-            <p>Section:<span className="text-yellow-400">NewToggle</span>(<span className="text-orange-300">"God Mode"</span>, <span className="text-orange-300">"Invincibility"</span>, <span className="text-purple-400">function</span>(state)</p>
+            <p>Section:<span className="text-yellow-400">NewToggle</span>(<span className="text-orange-300">"Invincibility"</span>, <span className="text-orange-300">"God Mode"</span>, <span className="text-purple-400">function</span>(state)</p>
             <p>&nbsp;&nbsp;<span className="text-purple-400">if</span> state <span className="text-purple-400">then</span></p>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;game.Players.LocalPlayer.Character.Humanoid.Health = math.huge</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-400">print</span>(<span className="text-orange-300">"God Mode Enabled"</span>)</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-400">print</span>(<span className="text-orange-300">"Invincibility Enabled"</span>)</p>
             <p>&nbsp;&nbsp;<span className="text-purple-400">end</span></p>
             <p><span className="text-purple-400">end</span>)</p>
             <p className="mt-8 text-white font-bold animate-pulse">-- CLICK BUTTON TO DECRYPT SOURCE --</p>

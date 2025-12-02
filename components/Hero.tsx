@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onDownload, downloadCount }) => {
         {/* HEADLINE - Compact & Punchy */}
         <h1 className="text-4xl md:text-6xl font-black text-white mb-4 leading-tight tracking-tight">
           99 NIGHTS <br className="md:hidden" />
-          <span className="text-green-500">GOD MODE</span>
+          <span className="text-green-500">MOD MENU</span>
         </h1>
         
         <p className="text-gray-400 text-sm md:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
