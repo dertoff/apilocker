@@ -59,7 +59,7 @@ export const Hero: React.FC<HeroProps> = ({ onDownload, downloadCount }) => {
         {/* Value Stack Pill */}
         <div className="flex justify-center mb-8">
            <div className="inline-flex items-center bg-gray-900/80 border border-gray-700 rounded-full px-1 py-1 pr-6 backdrop-blur-md shadow-lg">
-              <div className="bg-green-500 text-black text-xs font-bold px-3 py-1.5 rounded-full mr-3 animate-pulse">
+              <div className="bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full mr-3 animate-pulse">
                  UNLOCKED
               </div>
               <div className="flex items-center gap-4 text-xs md:text-sm font-mono text-gray-300">
@@ -72,27 +72,27 @@ export const Hero: React.FC<HeroProps> = ({ onDownload, downloadCount }) => {
         </div>
 
         {/* Main Headline */}
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-white mb-6 tracking-tighter leading-[0.9] drop-shadow-2xl">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 tracking-tighter leading-[0.95] drop-shadow-2xl">
           DOMINATE <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-b from-green-400 to-green-700 filter drop-shadow-[0_0_20px_rgba(34,197,94,0.4)]">
             THE FOREST
           </span>
         </h1>
         
-        <p className="text-xl md:text-3xl text-gray-300 mb-10 max-w-4xl mx-auto font-medium leading-relaxed">
-          Unlock the <span className="text-white underline decoration-green-500 underline-offset-4 decoration-4">only undetected script</span> with Auto-Farm, God Mode, and Infinite Ammo. 
+        <p className="text-lg md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto font-medium leading-relaxed">
+          Unlock the <span className="text-white underline decoration-green-500 underline-offset-4 decoration-2">only undetected script</span> with Auto-Farm, God Mode, and Infinite Ammo. 
         </p>
 
         {/* Platform Icons */}
         <div className="flex justify-center gap-6 mb-12 opacity-70">
            <div className="flex flex-col items-center gap-1 text-gray-400">
-             <Monitor className="w-6 h-6" /> <span className="text-[10px] uppercase font-bold">PC</span>
+             <Monitor className="w-5 h-5" /> <span className="text-[10px] uppercase font-bold">PC</span>
            </div>
            <div className="flex flex-col items-center gap-1 text-green-400">
-             <Smartphone className="w-6 h-6" /> <span className="text-[10px] uppercase font-bold">Mobile</span>
+             <Smartphone className="w-5 h-5" /> <span className="text-[10px] uppercase font-bold">Mobile</span>
            </div>
            <div className="flex flex-col items-center gap-1 text-gray-400">
-             <Globe className="w-6 h-6" /> <span className="text-[10px] uppercase font-bold">Web</span>
+             <Globe className="w-5 h-5" /> <span className="text-[10px] uppercase font-bold">Web</span>
            </div>
         </div>
 
@@ -100,35 +100,35 @@ export const Hero: React.FC<HeroProps> = ({ onDownload, downloadCount }) => {
         <div className="flex flex-col items-center gap-8">
           <button 
             onClick={onDownload}
-            className="group relative w-full md:w-auto bg-green-500 hover:bg-green-400 text-black text-2xl md:text-4xl font-black py-8 px-20 rounded-2xl shadow-[0_0_60px_rgba(34,197,94,0.5)] transition-all duration-300 transform hover:scale-105 active:scale-95 border-b-8 border-green-700 active:border-b-0 active:translate-y-2"
+            className="group relative w-full md:w-auto bg-gradient-to-b from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white text-xl md:text-2xl font-bold py-5 px-12 rounded-xl shadow-[0_10px_30px_-10px_rgba(34,197,94,0.6)] hover:shadow-[0_20px_40px_-10px_rgba(34,197,94,0.8)] transition-all duration-300 transform hover:scale-[1.02] active:scale-95 border-t border-white/20"
           >
-            <div className="absolute inset-0 bg-white/20 group-hover:bg-white/30 transition-all rounded-xl pointer-events-none"></div>
-            <span className="relative flex items-center justify-center gap-4 uppercase tracking-tight">
-              <Download className="w-8 h-8 md:w-10 md:h-10 animate-bounce" />
-              Unlock Script
+            <span className="relative flex items-center justify-center gap-3 uppercase tracking-wide">
+              <Download className="w-6 h-6 md:w-8 md:h-8 transition-transform group-hover:-translate-y-1" />
+              Download Script
             </span>
-            <div className="absolute -top-4 right-10 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded shadow-lg animate-pulse rotate-3">
+            {/* Clean Badge */}
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-green-700 text-[10px] font-black px-3 py-0.5 rounded-full shadow-md whitespace-nowrap">
               INSTANT ACCESS
             </div>
           </button>
           
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-sm text-gray-400 font-medium">
+          <div className="flex flex-wrap justify-center gap-4 text-xs md:text-sm text-gray-400 font-medium">
             <div className="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-lg border border-white/5">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
               <span className="text-white font-bold">{downloadCount.toLocaleString()}</span> Downloads
             </div>
             <div className="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-lg border border-white/5">
               <div className="flex text-yellow-400">
-                <Star className="w-3.5 h-3.5 fill-current" />
-                <Star className="w-3.5 h-3.5 fill-current" />
-                <Star className="w-3.5 h-3.5 fill-current" />
-                <Star className="w-3.5 h-3.5 fill-current" />
-                <Star className="w-3.5 h-3.5 fill-current" />
+                <Star className="w-3 h-3 fill-current" />
+                <Star className="w-3 h-3 fill-current" />
+                <Star className="w-3 h-3 fill-current" />
+                <Star className="w-3 h-3 fill-current" />
+                <Star className="w-3 h-3 fill-current" />
               </div>
-              <span className="text-white">5.0 Rating</span>
+              <span className="text-white">4.9/5.0</span>
             </div>
             <div className="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-lg border border-white/5">
-              <CheckCircle2 className="w-4 h-4 text-blue-400" />
+              <CheckCircle2 className="w-3 h-3 text-blue-400" />
               <span className="text-gray-200">VAC Safe</span>
             </div>
           </div>

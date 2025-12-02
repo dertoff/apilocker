@@ -111,9 +111,9 @@ export default function App() {
                 
                 <button
                   onClick={openLocker}
-                  className="w-full md:w-auto bg-green-500 hover:bg-green-400 text-black text-2xl md:text-4xl font-black py-8 px-16 rounded-2xl shadow-[0_0_30px_rgba(34,197,94,0.6)] hover:shadow-[0_0_60px_rgba(34,197,94,0.8)] transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-4 mx-auto uppercase leading-none"
+                  className="w-full md:w-auto bg-gradient-to-b from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white text-xl md:text-3xl font-bold py-6 px-16 rounded-xl shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:shadow-[0_0_50px_rgba(34,197,94,0.6)] transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-4 mx-auto border-t border-white/20"
                 >
-                  <Download className="w-8 h-8 md:w-12 md:h-12" />
+                  <Download className="w-8 h-8 md:w-10 md:h-10" />
                   INSTANT DOWNLOAD
                 </button>
                 
@@ -146,12 +146,12 @@ export default function App() {
       </div>
 
       {/* Sticky Mobile CTA */}
-      <div className="fixed bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black to-transparent z-30 md:hidden">
+      <div className="fixed bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/90 to-transparent z-30 md:hidden pb-6">
         <button 
           onClick={openLocker}
-          className="w-full bg-green-500 hover:bg-green-400 text-black font-black text-xl py-4 rounded-xl shadow-lg shadow-green-500/20 animate-pulse-fast flex items-center justify-center gap-2"
+          className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-green-900/40 flex items-center justify-center gap-2 border-t border-white/20"
         >
-          <Download className="w-6 h-6" />
+          <Download className="w-5 h-5" />
           GET SCRIPT FREE
         </button>
       </div>
