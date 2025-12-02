@@ -19,24 +19,20 @@
           extend: {
             colors: {
               forest: {
-                950: '#051405', // Deepest black/green
-                900: '#0a1f0a', // Dark forest green
+                950: '#051405', 
+                900: '#0a1f0a', 
                 800: '#143314',
-                500: '#22c55e', // Bright accent green
-              },
-              gold: {
-                400: '#ffd700',
-                500: '#e6c200',
+                500: '#22c55e', 
               }
             },
             animation: {
               'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'glow': 'glow 2s ease-in-out infinite alternate',
+              'shimmer': 'shimmer 2s linear infinite',
             },
             keyframes: {
-              glow: {
-                '0%': { boxShadow: '0 0 10px #22c55e' },
-                '100%': { boxShadow: '0 0 25px #22c55e, 0 0 50px #22c55e' }
+              shimmer: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(100%)' }
               }
             }
           }
@@ -45,25 +41,22 @@
     </script>
     <style>
       body {
-        background-color: #051405;
+        background-color: #050505;
         color: #e2e8f0;
-      }
-      .forest-fog {
-        background: radial-gradient(circle at center, transparent 0%, #051405 100%);
       }
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: #0a1f0a;
+        background: #050505;
       }
       ::-webkit-scrollbar-thumb {
-        background: #143314;
-        border-radius: 4px;
+        background: #222;
+        border-radius: 3px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #22c55e;
+        background: #16a34a;
       }
     </style>
   <script type="importmap">
