@@ -4,15 +4,12 @@ import {
   ShieldCheck, 
   CheckCircle2, 
   Zap, 
-  Smartphone, 
-  Clock, 
   ArrowRight, 
   Gift,
   Loader2,
-  FileText,
-  Download,
-  Lock,
-  Users
+  Clock,
+  Users,
+  X
 } from 'lucide-react';
 
 interface LockerModalProps {
@@ -34,9 +31,7 @@ interface Offer {
   conversionScore: number;
 }
 
-const API_KEY = "36988|HeS9IBcfaj14ILnJRLReTRW244mwbzE4snp5F4pC35934112";
-
-// Helper to decorate raw API offers with "Elite" metrics
+// Helper to decorate raw offers with "Elite" metrics
 const decorateOffer = (rawOffer: any): Offer => {
   const payoutNum = parseFloat(rawOffer.payout);
   const epcNum = parseFloat(rawOffer.epc);
@@ -70,21 +65,57 @@ const decorateOffer = (rawOffer: any): Offer => {
   };
 };
 
+// Static Offers - No API
+const STATIC_OFFERS = [
+  {
+    offerid: 101,
+    name_short: "Lords Mobile: Kingdom Wars",
+    adcopy: "Download and run for 30s",
+    picture: "https://play-lh.googleusercontent.com/1-hPx9gQ0rGfP4g6y-w7x7x7x7x7x7x7x7x7",
+    link: "#",
+    payout: "0.50",
+    epc: "0.20"
+  },
+  {
+    offerid: 102,
+    name_short: "TikTok",
+    adcopy: "Install & Register",
+    picture: "https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg",
+    link: "#",
+    payout: "0.30",
+    epc: "0.15"
+  },
+  {
+    offerid: 103,
+    name_short: "Coin Master",
+    adcopy: "Install app & complete village 3",
+    picture: "https://play-lh.googleusercontent.com/rqA73h8tqj_k0n186u436p497746537",
+    link: "#",
+    payout: "1.20",
+    epc: "0.40"
+  },
+  {
+    offerid: 104,
+    name_short: "AliExpress",
+    adcopy: "Open app for 30 seconds",
+    picture: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Aliexpress_logo.svg",
+    link: "#",
+    payout: "0.80",
+    epc: "0.10"
+  }
+];
+
 export const LockerModal: React.FC<LockerModalProps> = ({ onClose }) => {
   const [step, setStep] = useState<0 | 1 | 2>(0); // 0: Hook, 1: Value/Commitment, 2: Locker
   const [isTransitioning, setIsTransitioning] = useState(false);
-  
-  const [loading, setLoading] = useState(true);
   const [offers, setOffers] = useState<Offer[]>([]);
   const [isCoaching, setIsCoaching] = useState(false);
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
   const [liveUsers, setLiveUsers] = useState(124);
-  const [isMobile, setIsMobile] = useState(false);
 
-  // Device Detection
+  // Load Static Offers Immediately
   useEffect(() => {
-    const checkMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    setIsMobile(checkMobile);
+    setOffers(STATIC_OFFERS.map(decorateOffer).sort((a: Offer, b: Offer) => b.conversionScore - a.conversionScore));
   }, []);
 
   // Live User Simulation
@@ -94,97 +125,6 @@ export const LockerModal: React.FC<LockerModalProps> = ({ onClose }) => {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-
-  // API Fetch (Background)
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchOffers = async () => {
-      try {
-        const ipRes = await fetch('https://api.ipify.org?format=json');
-        const ipData = await ipRes.json();
-        
-        const endpoint = 'https://applocked.org/api/v2';
-        const params = new URLSearchParams({
-          ip: ipData.ip,
-          user_agent: navigator.userAgent,
-          ctype: '1', 
-          max: '6',
-          device: isMobile ? 'mobile' : 'desktop'
-        });
-
-        const url = `${endpoint}?${params.toString()}`;
-
-        const response = await fetch(url, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${API_KEY}`,
-            'Accept': 'application/json'
-          }
-        });
-
-        if (!response.ok) throw new Error("Network response was not ok");
-        const data = await response.json();
-
-        if (mounted) {
-          if (data.success && data.offers?.length > 0) {
-            const decorated = data.offers.map(decorateOffer);
-            setOffers(decorated.sort((a: Offer, b: Offer) => b.conversionScore - a.conversionScore));
-          } else {
-            throw new Error("No offers");
-          }
-        }
-      } catch (err) {
-        // Fallback Data
-        if (mounted) {
-          const fallbackOffers = [
-            {
-              offerid: 101,
-              name_short: "Lords Mobile: Kingdom Wars",
-              adcopy: "Download and run for 30s",
-              picture: "https://play-lh.googleusercontent.com/1-hPx9gQ0rGfP4g6y-w7x7x7x7x7x7x7x7x7",
-              link: "#",
-              payout: "0.50",
-              epc: "0.20"
-            },
-            {
-              offerid: 102,
-              name_short: "TikTok",
-              adcopy: "Install & Register",
-              picture: "https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg",
-              link: "#",
-              payout: "0.30",
-              epc: "0.15"
-            },
-            {
-              offerid: 103,
-              name_short: "Coin Master",
-              adcopy: "Install app & complete village 3",
-              picture: "https://play-lh.googleusercontent.com/rqA73h8tqj_k0n186u436p497746537",
-              link: "#",
-              payout: "1.20",
-              epc: "0.40"
-            },
-            {
-              offerid: 104,
-              name_short: "AliExpress",
-              adcopy: "Open app for 30 seconds",
-              picture: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Aliexpress_logo.svg",
-              link: "#",
-              payout: "0.80",
-              epc: "0.10"
-            }
-          ];
-          setOffers(fallbackOffers.map(decorateOffer).sort((a: Offer, b: Offer) => b.conversionScore - a.conversionScore));
-        }
-      } finally {
-        if (mounted) setLoading(false);
-      }
-    };
-
-    fetchOffers();
-    return () => { mounted = false; };
-  }, [isMobile]);
 
   const handleNextStep = () => {
     setIsTransitioning(true);
@@ -419,76 +359,68 @@ export const LockerModal: React.FC<LockerModalProps> = ({ onClose }) => {
                 Complete ONE offer below to unlock:
               </p>
 
-              {loading ? (
-                 <div className="space-y-3">
-                   {[1, 2, 3].map(i => (
-                     <div key={i} className="h-20 bg-gray-100 rounded-xl animate-pulse"></div>
-                   ))}
-                 </div>
-              ) : (
-                <div className="space-y-3">
-                   {offers.map((offer, idx) => {
-                      let badgeColor = "bg-gray-100 text-gray-600";
-                      if (offer.label === 'FASTEST') badgeColor = "bg-yellow-100 text-yellow-700 border-yellow-200";
-                      if (offer.label === 'HIGHEST PAYOUT') badgeColor = "bg-green-100 text-green-700 border-green-200";
-                      if (offer.label === 'EASIEST') badgeColor = "bg-blue-100 text-blue-700 border-blue-200";
+              <div className="space-y-3">
+                 {offers.map((offer, idx) => {
+                    let badgeColor = "bg-gray-100 text-gray-600";
+                    if (offer.label === 'FASTEST') badgeColor = "bg-yellow-100 text-yellow-700 border-yellow-200";
+                    if (offer.label === 'HIGHEST PAYOUT') badgeColor = "bg-green-100 text-green-700 border-green-200";
+                    if (offer.label === 'EASIEST') badgeColor = "bg-blue-100 text-blue-700 border-blue-200";
 
-                      return (
-                        <div 
-                          key={offer.offerid}
-                          onClick={() => handleOfferStart(offer)}
-                          className="relative bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-blue-400 transition-all cursor-pointer group hover:scale-[1.01]"
-                        >
-                          {/* Recommended Tag */}
-                          {idx === 0 && (
-                             <div className="absolute -top-2.5 right-4 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm animate-pulse z-10">
-                               RECOMMENDED
-                             </div>
-                          )}
+                    return (
+                      <div 
+                        key={offer.offerid}
+                        onClick={() => handleOfferStart(offer)}
+                        className="relative bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-blue-400 transition-all cursor-pointer group hover:scale-[1.01]"
+                      >
+                        {/* Recommended Tag */}
+                        {idx === 0 && (
+                           <div className="absolute -top-2.5 right-4 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm animate-pulse z-10">
+                             RECOMMENDED
+                           </div>
+                        )}
 
-                          <div className="flex items-start gap-4">
-                            <img 
-                              src={offer.picture} 
-                              alt={offer.name_short}
-                              className="w-12 h-12 rounded-lg object-cover border border-gray-100 bg-gray-50 shrink-0"
-                              onError={(e) => { (e.target as HTMLImageElement).src = "https://via.placeholder.com/64?text=App"; }}
-                            />
-                            
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between mb-1">
-                                <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${badgeColor}`}>
-                                  ⚡ {offer.label}
-                                </span>
-                                <span className="text-[10px] text-gray-400 flex items-center gap-1">
-                                  <Clock className="w-3 h-3" /> {offer.timeEstimate}
-                                </span>
-                              </div>
-                              
-                              <h3 className="text-sm font-bold text-gray-900 leading-tight mb-1 truncate">
-                                {offer.name_short}
-                              </h3>
-                              
-                              <div className="flex items-center gap-2 text-xs text-gray-500">
-                                 <div className="flex items-center text-yellow-400 gap-0.5">
-                                   <span className="text-gray-700 font-bold">{offer.stars.toFixed(1)}</span>
-                                   <Star className="w-3 h-3 fill-current" />
-                                 </div>
-                                 <span className="text-gray-300">|</span>
-                                 <span>{offer.completes.toLocaleString()} verified</span>
-                              </div>
+                        <div className="flex items-start gap-4">
+                          <img 
+                            src={offer.picture} 
+                            alt={offer.name_short}
+                            className="w-12 h-12 rounded-lg object-cover border border-gray-100 bg-gray-50 shrink-0"
+                            onError={(e) => { (e.target as HTMLImageElement).src = "https://via.placeholder.com/64?text=App"; }}
+                          />
+                          
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${badgeColor}`}>
+                                ⚡ {offer.label}
+                              </span>
+                              <span className="text-[10px] text-gray-400 flex items-center gap-1">
+                                <Clock className="w-3 h-3" /> {offer.timeEstimate}
+                              </span>
                             </div>
+                            
+                            <h3 className="text-sm font-bold text-gray-900 leading-tight mb-1 truncate">
+                              {offer.name_short}
+                            </h3>
+                            
+                            <div className="flex items-center gap-2 text-xs text-gray-500">
+                               <div className="flex items-center text-yellow-400 gap-0.5">
+                                 <span className="text-gray-700 font-bold">{offer.stars.toFixed(1)}</span>
+                                 <Star className="w-3 h-3 fill-current" />
+                               </div>
+                               <span className="text-gray-300">|</span>
+                               <span>{offer.completes.toLocaleString()} verified</span>
+                            </div>
+                          </div>
 
-                            <div className="self-center">
-                              <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                                <ArrowRight className="w-4 h-4" />
-                              </div>
+                          <div className="self-center">
+                            <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                              <ArrowRight className="w-4 h-4" />
                             </div>
                           </div>
                         </div>
-                      );
-                   })}
-                </div>
-              )}
+                      </div>
+                    );
+                 })}
+              </div>
             </>
           )}
         </div>
@@ -503,17 +435,17 @@ export const LockerModal: React.FC<LockerModalProps> = ({ onClose }) => {
   );
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-md animate-in fade-in duration-500" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden animate-in slide-in-from-bottom-8 duration-300 max-h-[90vh] flex flex-col">
+          <div className="absolute top-4 right-4 z-20">
+            <button onClick={onClose} className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-500 transition-colors">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
 
-      {/* Main Modal Container */}
-      <div className={`relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 ${isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'} ${step === 2 ? 'max-w-lg h-[80vh]' : ''}`}>
-        
-        {step === 0 && <ScreenHook />}
-        {step === 1 && <ScreenValue />}
-        {step === 2 && <ScreenLocker />}
-
+          {step === 0 && <ScreenHook />}
+          {step === 1 && <ScreenValue />}
+          {step === 2 && <ScreenLocker />}
       </div>
     </div>
   );
