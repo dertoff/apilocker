@@ -38,15 +38,17 @@ export const ScriptPreview: React.FC<ScriptPreviewProps> = ({ onDownload, active
 
   return (
     <section className="relative max-w-5xl mx-auto px-4">
-      {/* Header */}
-      <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-5xl font-black text-white mb-3 uppercase tracking-tight">
-          {activeTab === 'script' ? 'SOURCE CODE' : 'VAULT DATABASE'}
-        </h2>
-        <p className="text-gray-400 text-sm">
-          {activeTab === 'script' ? 'Secure Loader V5.0.2 - Updated 2026' : 'Select a code to verify and reveal.'}
-        </p>
-      </div>
+      {/* Header - Only visible for Script tab now */}
+      {activeTab === 'script' && (
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-3 uppercase tracking-tight">
+            SOURCE CODE
+          </h2>
+          <p className="text-gray-400 text-sm">
+            Secure Loader V5.0.2 - Updated 2026
+          </p>
+        </div>
+      )}
 
       {activeTab === 'script' ? (
         // SCRIPT PREVIEW (Keep original script look for the Script Tab)

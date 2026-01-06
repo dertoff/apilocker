@@ -54,13 +54,13 @@ export const Hero: React.FC<HeroProps> = ({ onDownload, downloadCount, activeTab
           
           {/* LOGO AREA */}
           <div className="mb-8 relative inline-block group" onClick={onDownload}>
-            <div className={`w-32 h-32 md:w-40 md:h-40 bg-gray-900 rounded-3xl p-1 shadow-2xl border transform transition-transform group-hover:scale-105 cursor-pointer relative overflow-hidden ${activeTab === 'script' ? 'shadow-green-500/20 border-green-500/30' : 'shadow-indigo-500/20 border-indigo-500/30'}`}>
+            <div className={`w-32 h-32 md:w-40 md:h-40 bg-gray-900/50 rounded-3xl p-6 shadow-2xl border transform transition-transform group-hover:scale-105 cursor-pointer relative overflow-hidden backdrop-blur-sm ${activeTab === 'script' ? 'shadow-green-500/20 border-green-500/30' : 'shadow-indigo-500/20 border-indigo-500/30'}`}>
                <img 
-                 src="https://tr.rbxcdn.com/180DAY-f4a8fba434c98c49eb60bba7ff7fe636/150/150/Image/Webp/noFilter" 
+                 src="https://tr.rbxcdn.com/180DAY-01c83a40091a0d1f1753ad6cca099d31/150/150/Image/Webp/noFilter" 
                  alt="99 Nights Icon" 
-                 className="w-full h-full object-cover rounded-2xl"
+                 className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
                />
-               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none rounded-2xl"></div>
+               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none rounded-2xl"></div>
             </div>
             {/* Status Badge */}
             <div className={`absolute -bottom-3 left-1/2 -translate-x-1/2 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg border border-black flex items-center gap-1 whitespace-nowrap z-20 ${activeTab === 'script' ? 'bg-green-600' : 'bg-indigo-600'}`}>
