@@ -52,6 +52,20 @@
       body {
         background-color: #050505;
         color: #e2e8f0;
+        /* Prevent text selection */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      /* Prevent image dragging */
+      img {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+        pointer-events: none; /* Also prevents right click specific to image */
       }
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
@@ -68,6 +82,52 @@
         background: #16a34a;
       }
     </style>
+    
+    <!-- Site Protection Script -->
+    <script>
+      // Disable Right Click
+      document.addEventListener('contextmenu', event => event.preventDefault());
+
+      // Disable Keyboard Shortcuts (F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, etc.)
+      document.addEventListener('keydown', function(event) {
+        // F12
+        if (event.key === 'F12' || event.keyCode === 123) {
+          event.preventDefault();
+          return false;
+        }
+        
+        // Ctrl+Shift+I (DevTools)
+        if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i' || event.keyCode === 73)) {
+          event.preventDefault();
+          return false;
+        }
+
+        // Ctrl+Shift+J (Console)
+        if (event.ctrlKey && event.shiftKey && (event.key === 'J' || event.key === 'j' || event.keyCode === 74)) {
+          event.preventDefault();
+          return false;
+        }
+
+        // Ctrl+Shift+C (Inspect Element)
+        if (event.ctrlKey && event.shiftKey && (event.key === 'C' || event.key === 'c' || event.keyCode === 67)) {
+          event.preventDefault();
+          return false;
+        }
+
+        // Ctrl+U (View Source)
+        if (event.ctrlKey && (event.key === 'U' || event.key === 'u' || event.keyCode === 85)) {
+          event.preventDefault();
+          return false;
+        }
+
+        // Ctrl+S (Save Page)
+        if (event.ctrlKey && (event.key === 'S' || event.key === 's' || event.keyCode === 83)) {
+          event.preventDefault();
+          return false;
+        }
+      });
+    </script>
+
   <script type="importmap">
 {
   "imports": {
