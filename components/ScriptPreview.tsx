@@ -19,12 +19,12 @@ export const ScriptPreview: React.FC<ScriptPreviewProps> = ({ onDownload, active
       bg: "bg-cyan-950/10"
     },
     { 
-      title: "ASSASSIN UNLOCK",
-      desc: "Unlock Assassin Class.",
-      realSuffix: "SIN",
-      color: "text-purple-400",
-      border: "border-purple-500/20",
-      bg: "bg-purple-950/10"
+      title: "LEGENDARY ICE SWORD",
+      desc: "Unlock Frost Blade Item.",
+      realSuffix: "ICE",
+      color: "text-sky-400",
+      border: "border-sky-500/20",
+      bg: "bg-sky-950/10"
     },
     { 
       title: "DEV ADMIN MENU", 
