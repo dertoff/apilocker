@@ -59,6 +59,22 @@ export default function App() {
     return () => clearInterval(interval);
   }, [activeTab]);
 
+  const handleLockerTrigger = () => {
+    console.log("Triggering OGAds Locker...");
+    try {
+        if ((window as any).og_load) {
+            (window as any).og_load();
+        } else {
+            console.warn("Locker function og_load() not found. Ensure scripts are loaded.");
+            // Fallback for testing or adblock scenarios
+            alert("Locker loading... (If nothing happens, disable AdBlock)");
+        }
+    } catch (e) {
+        console.error("Error launching locker:", e);
+    }
+    setIsVerifying(false);
+  };
+
   const handleAction = () => {
     if (activeTab === 'codes') {
         const codesSection = document.getElementById('script-preview');
@@ -67,22 +83,8 @@ export default function App() {
             return;
         }
     }
-    // Start verification flow
+    // Start verification modal flow which then calls handleLockerTrigger
     setIsVerifying(true);
-  };
-
-  const handleLockerTrigger = () => {
-    console.log("Triggering Content Locker...");
-    try {
-        if ((window as any)._rp) {
-            (window as any)._rp();
-        } else {
-            console.warn("Locker function _rp() not found on window. Ensure scripts are loaded.");
-        }
-    } catch (e) {
-        console.error("Error launching locker:", e);
-    }
-    setIsVerifying(false);
   };
 
   return (
@@ -151,7 +153,7 @@ export default function App() {
         <Footer />
       </div>
 
-      {/* Verification Modal */}
+      {/* Verification Modal - Restored */}
       {isVerifying && (
         <VerificationModal onComplete={handleLockerTrigger} />
       )}
